@@ -1,0 +1,17 @@
+{
+    "result": {
+        "heading": "Captura la cédula del cliente",
+        "subheading": "captura las dos caras de la cedula de identidad",
+        "description": "asegurandote que el número del documento, nombre fecha de nacimiento y firma sean claramente legibles",
+        "options": [
+            {
+                "text": "usar cédula paraguaya",
+                "details": ""
+            },
+            {
+                "text": "usar documento extranjero",
+                "details": "(i.e: pasaporte, cédula argentina...)"
+            }
+        ]
+    }
+}

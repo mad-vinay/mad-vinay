@@ -1,0 +1,22 @@
+{
+    "result": {
+        "items": [
+            {
+                "text": "SIM + 1GB",
+                "description": "vence en 30 dias"
+            },
+            {
+                "text": "SIM + 500MB",
+                "description": "Vence en 7 dias"
+            },
+            {
+                "text": "SIM + 200MB",
+                "description": "Vence en 2 dias"
+            },
+            {
+                "text": "SIM + FB + whatsapp + 100MB",
+                "description": "Vence en 24 horas"
+            }
+        ]
+    }
+}

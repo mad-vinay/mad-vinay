@@ -1,0 +1,19 @@
+{
+    "result": {
+        "heading": "Cuenta",
+        "items": [
+            {
+                "text": "ventas",
+                "icon": "../../../images/icn-ventas@3x.png"
+            },
+            {
+                "text": "cambio de PIN",
+                "icon": "../../../images/icn-ChangePin@3x.png"
+            },
+            {
+                "text": "Salir",
+                "icon": "../../../images/icn-exit@3x.png"
+            }
+        ]
+    }
+}

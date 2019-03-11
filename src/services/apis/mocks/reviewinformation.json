@@ -1,0 +1,32 @@
+{
+    "result": {
+        "heading": "Información del cliente",
+        "details": [
+            {
+                "item": "Número de documento",
+                "value": "987654356"
+            },
+            {
+                "item": "Nombre y apellidos",
+                "value": "Galeano Rómero"
+            },
+            {
+                "item": "Número de teléfono",
+                "value": "****5964"
+            },
+            {
+                "item": "fecha de nacimiento",
+                "value": "26/07/1987"
+            },
+            {
+                "item": "SIM",
+                "value": "45674321565789543567"
+            }
+        ],
+        "selectedPackage": {
+            "heading": "SIM + FB + Whatsapp + 100MB",
+            "subHeading": "Vence en 24 horas",
+            "payment": "G70"
+        }
+    }
+}

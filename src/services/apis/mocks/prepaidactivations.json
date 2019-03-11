@@ -1,0 +1,22 @@
+{
+    "result": {
+        "heading": "Activación prepago",
+        "items": [
+            {
+                "text": "Activacion + Paquete bienvenida",
+                "icon": "../../../images/icn-activation@3x.png",
+                "url": "/WelcomePackage"
+            },
+            {
+                "text": "Cambio de sim",
+                "icon": "../../../images/icn-changeSim@3x.png",
+                "url": "/WelcomePackage"
+            },
+            {
+                "text": "Portabilidad prepago",
+                "icon": "../../../images/icn-portabilidad@3x.png",
+                "url": "/WelcomePackage"
+            }
+        ]
+    }
+}
