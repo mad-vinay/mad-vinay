@@ -344,6 +344,7 @@ export const loginAction = () => {
 
     API.login({ dmsid, pin, msisdn }).then(
        loginData => {
+         debugger
         identify(msisdn, {
           distributorId: get(loginData, "distributor"),
           seller: get(loginData, "seller"),

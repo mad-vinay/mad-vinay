@@ -11,10 +11,11 @@ import {
   loginAction
 } from "../../actionCreators/auth.js";
 import styled from "styled-components";
-//import { urlFor } from "../../router";
+// import { urlFor } from "../../router";
 import { onEnterAction } from "../../util";
 import _ from "lodash";
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import {Link} from "react-router-dom";
 
 const InputWrap = styled.div`
   display: flex;
@@ -30,9 +31,9 @@ const InputWrap = styled.div`
 
 class Login extends Component {
 
-  componentWillReceiveProps(nextProps) {
-    debugger
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   debugger
+  // }
 
   constructor(props){
     super(props);
@@ -113,6 +114,7 @@ class Login extends Component {
                 Cambiar PIN
               </a>
             </p> */}
+            <Link className="text-secondary text-decoration-none light" to={{pathname:'/ChangePin'}}>Cambiar PIN</Link>
           </div>
         </div>
       </PageTitle>

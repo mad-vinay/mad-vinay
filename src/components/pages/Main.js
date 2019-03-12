@@ -20,6 +20,9 @@ class MainPage extends React.Component {
         if(this.props.auth.status === 'LOGGED_IN') {
             return  <MainMenu/>
         }
+        // if(this.props.auth.status === 'PENDING') {
+        //     return  <SplashScreen />
+        //  }
         return <SplashScreen />
     }
 }

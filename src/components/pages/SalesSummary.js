@@ -13,6 +13,7 @@ import {
   TableRow,
   TableRowColumn
 } from "material-ui/Table";
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 const formatDateTime = (dateTime = "") => {
   const [date, time] = dateTime.split(" ");
@@ -152,6 +153,7 @@ const renderLoadingTable = () => {
 export class SalesSummary extends Component {
   render() {
     return (
+      <MuiThemeProvider>
       <PageTitle page={this.props.pageName}>
         <div className="max-width-4 mx-auto">
           <div className="p2">
@@ -165,7 +167,7 @@ export class SalesSummary extends Component {
               onCellClick={(rowNum, columnId) => {
                 redirectTo({
                   page: "SalesDetail",
-                  id: this.props.items.data[rowNum].transactionId
+                  // id: this.props.items.data[rowNum].transactionId
                 });
               }}
             >
@@ -210,23 +212,24 @@ export class SalesSummary extends Component {
                 </TableRow>
               </TableHeader>
               <TableBody displayRowCheckbox={false}>
-                {this.props.items.state === "loading"
+                {/* {this.props.items.state === "loading"
                   ? renderLoadingTable()
-                  : renderItemsTable(this.props.items)}
+                  : renderItemsTable(this.props.items)} */}
               </TableBody>
             </Table>
           </div>
         </div>
       </PageTitle>
+      </MuiThemeProvider>
     );
   }
 }
 
 export default connect(state => {
-  const sales = dataForId(state, configToId("Sales", "list", true));
+  // const sales = dataForId(state, configToId("Sales", "list", true));
 
   return {
-    items: sales,
+    // items: sales,
     pageName: siteTree.SalesSummary.name
   };
 })(SalesSummary);

@@ -13,7 +13,7 @@ const App = () => {
     switch (country) {
         // case 'py': return <POAApp country={country} />;
         // case 'gt': return <POSApp country={country} />;
-        default: return <POAApp country={"gt"} />;
+        default: return <POAApp country={"py"} />;
     }
 }
 ReactDOM.render(

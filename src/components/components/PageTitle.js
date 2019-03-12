@@ -98,6 +98,7 @@ export class PageTitle extends Component {
           <AppBar
             title={pageTitle}
             onLeftIconButtonClick={() => {
+              debugger
               redirectTo(linkParams);
             }}
             iconElementLeft={

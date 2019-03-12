@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import { dataForId, configToId } from "../../util/db";
 import reduce from "lodash/reduce";
 import map from "lodash/map";
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 const CATEGORY_ICONS = {
   datos: "internet",
@@ -82,24 +83,26 @@ const Loading = props => {
 export class PackagesCategories extends Component {
   render() {
     return (
+      <MuiThemeProvider>
       <PageTitle page="PackagesCategories">
         <div className="max-width-4 mx-auto">
-          {this.props.items.state === "loading" ? (
+          {/* {this.props.items.state === "loading" ? (
             <Loading />
           ) : (
             <Categories categories={this.props.categories} />
-          )}
+          )} */}
         </div>
       </PageTitle>
+      </MuiThemeProvider>
     );
   }
 }
 
 export default connect(state => {
-  const packages = dataForId(state, configToId("Package", "list", true));
+  // const packages = dataForId(state, configToId("Package", "list", true));
 
   const categories = reduce(
-    packages.data,
+    // packages.data,
     (acc, p) => {
       const category = p.category;
       if (acc.indexOf(category) === -1) {
@@ -111,7 +114,7 @@ export default connect(state => {
   );
 
   return {
-    items: packages,
+    // items: packages,
     categories
   };
 })(PackagesCategories);

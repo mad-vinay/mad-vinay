@@ -13,6 +13,7 @@ import {
 import { onEnterAction } from "../../util";
 import styled from "styled-components";
 import _ from "lodash";
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const InputWrap = styled.div`
   display: flex;
@@ -46,6 +47,7 @@ export class ChangePin extends Component {
     });
 
     return (
+      <MuiThemeProvider>
       <PageTitle page="ChangePin">
         <div className="max-width-4 mx-auto">
           <div className="clearfix center">
@@ -103,6 +105,7 @@ export class ChangePin extends Component {
           </div>
         </div>
       </PageTitle>
+      </MuiThemeProvider>
     );
   }
 }

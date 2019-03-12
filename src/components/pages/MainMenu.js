@@ -25,7 +25,8 @@ import Refresh from "material-ui/svg-icons/navigation/refresh.js";
 import PinDialog from "../components/PinDialog";
 import _ from 'lodash';
 import { track } from "../../util/tracker";
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import {Link} from "react-router-dom";
 
 const ClientPhoneNumberWrap = styled.div`
   display: flex;
@@ -211,6 +212,11 @@ export const ConnectedEpinDialog = connect(
 )(PinDialog);
 
 class ClientPhoneNumber extends Component {
+
+componentDidMount(){
+  console.log(this.props, '################################')
+}
+
   render() {
     return (
       <MuiThemeProvider>
@@ -324,24 +330,25 @@ export class MainMenu extends Component {
                   leftAvatar={<img src="/images/icn-packages-on.png" alt="" />}
                   primaryText="Paquetes"
                   rightIcon={<ChevronRight color="#4CC5F2" />}
-                  onClick={() => {
-                    if (this.props.clientPhone.isValid) {
-                      redirectTo({ page: "PackagesCategories" });
-                      this.setState({errorMessage:""});
-                      this.setState({errorClass: ""});
-                    } else {
-                      if(!this.props.clientPhone.phoneNumber){
-                        this.setState({errorMessage: errorMessageText})
-                        this.setState({errorClass: "mobileNumber-input"})
-                      }
-                      this.props.trackClickOnDisabled(
-                        this.props.msisdn,
-                        this.props.dmsid
-                      );
-                    }
-                  }}
+                  // onClick={() => {
+                  //   if (this.props.clientPhone.isValid) {
+                  //     redirectTo({ page: "PackagesCategories" });
+                  //     this.setState({errorMessage:""});
+                  //     this.setState({errorClass: ""});
+                  //   } else {
+                  //     if(!this.props.clientPhone.phoneNumber){
+                  //       this.setState({errorMessage: errorMessageText})
+                  //       this.setState({errorClass: "mobileNumber-input"})
+                  //     }
+                  //     this.props.trackClickOnDisabled(
+                  //       this.props.msisdn,
+                  //       this.props.dmsid
+                  //     );
+                  //   }
+                  // }}
                   style={listItemStyle}
-                />
+                >
+                <Link className=" " to={{pathname:'/PackagesCategories'}}>PackagesCategories</Link></ListItem>
               </List>
             </Card>
           </CardWrap>
@@ -352,10 +359,14 @@ export class MainMenu extends Component {
                   primaryText="Ventas"
                   leftAvatar={<img src="/images/icn-sales.png" alt="" />}
                   rightIcon={<ChevronRight color="#4CC5F2" />}
-                  onClick={() => {
-                    redirectTo({ page: "SalesSummary" });
-                  }}
-                />
+                  // onClick={() => {
+                  //   debugger
+                  //   this.props.history.push("/SalesSummary")
+                  //   // redirectTo({ page: "SalesSummary" });
+                  // }}
+                >
+                <Link className=" " to={{pathname:'/SalesSummary'}}>Place Order</Link>
+                </ListItem>
                 <Divider />
                 <ListItem
                   primaryText="Cambio de PIN"

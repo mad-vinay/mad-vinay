@@ -3,7 +3,8 @@ import {
     Route,
     withRouter,
     Switch,
-    Redirect
+    Redirect,
+    BrowserRouter
 } from "react-router-dom";
 import Styled from './styled';
 import { poaRouteconfig } from '../config/poaRoutes';
@@ -22,11 +23,16 @@ class AppRouter extends React.Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        debugger
+    }
+
     renderRoutes = () => {
         // debugger;
         if (this.props.country === "gt") {
             let routes = this.state.posRoutes.gt.map((item, key) => {
-                return <Route key={key} path={item.path} component={item.component} />
+                debugger
+                return <Route key={key} exact path={item.path} component={item.component} />
                 // return <PrivateRoute exact key={key} path={item.path} component={item.component} authed={this.props.auth.status} />
             })
             return routes
@@ -42,9 +48,11 @@ class AppRouter extends React.Component {
     render() {
         return (
             <Styled.AppContainer>
-                <Switch>
-                    {this.renderRoutes()}
-                </Switch>
+                <BrowserRouter>
+                    <Switch>
+                        {this.renderRoutes()}
+                    </Switch>
+                </BrowserRouter>
             </Styled.AppContainer>
         );
     }
