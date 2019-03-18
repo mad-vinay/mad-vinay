@@ -8,6 +8,16 @@ import { addAlertAction } from "./alerts";
 import { saveTransactionDetailsAction } from './selling';
 import { push, history } from "react-router-redux";
 
+import { apiUrl as url } from '../../src/config/api';
+
+
+
+
+
+
+
+
+
 export const STATUSES = {
   PENDING: "PENDING",
   LOGIN_READY: "LOGIN_READY",
@@ -29,13 +39,18 @@ export const UPDATE_BALANCE_ACTION = "auth/UPDATE_BALANCE";
 export const UPDATE_OLD_PIN_ACTION = "auth/UPDATE_OLD_PIN";
 export const UPDATE_NEW_PIN_ACTION = "auth/UPDATE_NEW_PIN";
 export const CLEAR_CHANGE_PIN_ACTION = "auth/CLEAR_CHANGE_PIN";
-export const UPDATE_BALANCE_EPIN_POPUP_ACTION =
-  "auth/UPDATE_BALANCE_EPIN_POPUP";
+export const UPDATE_BALANCE_EPIN_POPUP_ACTION = "auth/UPDATE_BALANCE_EPIN_POPUP";
 export const UPDATE_BALANCE_EPIN_ACTION = "auth/UPDATE_BALANCE_EPIN";
 export const DMSID_FETCHED_ACTION = "auth/DMSID_FETCHED";
 export const CLEAR_PIN_ACTION = "auth/CLEAR_PIN";
 export const UPDATE_THRESHOLD_ACTION = "auth/UPDATE_THRESHOLD_ACTION";
-export const DISPLAY_START_SCREEN = "START_SCREEN"
+export const DISPLAY_START_SCREEN = "START_SCREEN";
+export const SET_DATA_SUCCESS = "SET_DATA_SUCCESS";
+export const SET_PARTIALLY_FAILED = "SET_PARTIALLY_FAILED";
+export const SET_DATA_FAILED = "SET_DATA_FAILED";
+
+
+
 
 export const loginUserAction = payload => {
   return {
@@ -415,3 +430,112 @@ export const displayStartScreen = () => {
     type: DISPLAY_START_SCREEN
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+export const getFrontIdDetails = (data) => {
+  debugger
+  return (dispatch) => {
+    
+    // const state = getState();
+    // const { dmsid, pin } = get(state, "auth");
+    // const msisdn = get(state, "auth.token.msisdn");
+    // const page = get(state, "route.data.page");
+
+    // API.login({ dmsid, pin, msisdn }).then(
+    //    loginData => {
+    //      debugger
+    //     identify(msisdn, {
+    //       distributorId: get(loginData, "distributor"),
+    //       seller: get(loginData, "seller"),
+    //       pos_msisdn: msisdn,
+    //       id: dmsid
+    //     });
+    //     API.getDmsidData({ dmsid }).then(data => {
+    //       dispatch(dmsidFetchedAction(data));
+    //     });
+    //     dispatch(loggedinAction({ login: loginData }));
+    //     dispatch(requestBalanceAction());
+    //     autoLogout(dispatch, getState);
+    //     // if ("MainMenu" !== page) {
+    //     //   redirectTo({ page: "MainMenu" });
+    //     // } else {
+    //     //   restartResponders();
+    //     // }
+    //   },
+    //   err => {
+    //     const error = get(err, "response.data.error.description");
+    //     dispatch(addAlertAction("error", error));
+    //   }
+    // );
+
+   axios({
+      method: 'post',
+      url,
+      data,
+      config: {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Accept': 'application/json',
+        }
+      }
+    }).then(data => {
+      // const Payload = JSON.parse(data.data.Payload);
+      const Payload = data.data.Payload;
+      if (Payload.errorMessage) {
+        dispatch(setDataFailed(Payload.errorMessage));
+      } else {
+        if (!Payload.idno || !Payload.name || !Payload.dob) {
+          dispatch(setDataPartiallyFailed({
+            data: {
+              frontData: {
+                number: Payload.idno,
+                surname: Payload.name,
+                dob: Payload.dob,
+              }
+            },
+            message:
+              'No se detectan todos los campos. Por favor intente una vez más o ingrese los valores en el campo'
+          }));
+        } else {
+          dispatch(setDataSuccess({
+            frontData: {
+              number: Payload.idno,
+              surname: Payload.name,
+              dob: Payload.dob,
+            }
+          }));
+        }
+      }
+    }).catch(({ message }) => {
+      dispatch(setDataFailed(message));
+    })
+  };
+};
+
+export const setDataSuccess = data => {
+  return {
+    type: SET_DATA_SUCCESS,
+    payload: data
+  };
+};
+export const setDataFailed = data => {
+  return {
+    type: SET_DATA_FAILED,
+    payload: data
+  };
+};
+export const setDataPartiallyFailed = data => {
+  return {
+    type: SET_PARTIALLY_FAILED,
+    payload: data
+  };
+};

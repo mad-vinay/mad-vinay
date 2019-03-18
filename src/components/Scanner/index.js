@@ -55,7 +55,7 @@ class Scanner extends Component {
   }
 
   handleClick = async () => {
-    this.props.setProcessingStatus(true);
+    // this.props.setProcessingStatus(true);
     let videoPlayer = this.video.current;
     let canvas = this.canvas.current;
     let image = this.img.current;

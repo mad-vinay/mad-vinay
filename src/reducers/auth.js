@@ -15,10 +15,30 @@ import {
   DMSID_FETCHED_ACTION,
   CLEAR_PIN_ACTION,
   UPDATE_THRESHOLD_ACTION,
-  DISPLAY_START_SCREEN
+  DISPLAY_START_SCREEN,
+  SET_DATA_SUCCESS,
+  SET_DATA_FAILED,
+  SET_PARTIALLY_FAILED
 } from "../actionCreators/auth";
 
 import { cleanPin, cleanDmsid, cleanOtp } from "../util";
+
+const initialState = {
+  data: {
+    frontData: {
+      number: '',
+      surname: '',
+      dob: '',
+    },
+    rearData: {},
+  },
+  error: {
+    has: false,
+    message: '',
+  },
+  isProcessing: false,
+}
+
 
 const logoutUser = state => {
   const newState = { ...state };
@@ -46,7 +66,12 @@ const clearPin = state => {
   return newState;
 };
 
-export default function(
+
+
+
+
+
+export default function (
   state = { status: STATUSES.PENDING /*dmsid: 123456, pin: 3030 */ },
   action
 ) {
@@ -95,15 +120,52 @@ export default function(
     case CLEAR_PIN_ACTION:
       return clearPin(state);
     case UPDATE_THRESHOLD_ACTION:
-    return {
-      ...state,
-      ...action.payload
-    }
-      case DISPLAY_START_SCREEN:
+      return {
+        ...state,
+        ...action.payload
+      }
+    case DISPLAY_START_SCREEN:
       // debugger
       return {
         ...state,
         status: "START_SCREEN"
+      };
+
+    case SET_DATA_SUCCESS:
+      debugger
+      return {
+        // ...state,
+        // status: "START_SCREEN"
+        ...initialState,
+        data: { ...action.payload },
+        error: {
+          has: false,
+          message: '',
+        },
+        isProcessing: false,
+      };
+      case SET_DATA_FAILED:
+      debugger
+      return {
+        ...initialState,
+        // initialState: {...action.initialState},
+        error: {
+          has: true,
+          message: '',
+        },
+        isProcessing: false,
+      };
+      case SET_PARTIALLY_FAILED:
+      debugger
+      return {
+        ...initialState,
+        // initialState: {...action.initialState},
+        data: { ...action.payload.data },
+        error: {
+          has: true,
+          message: action.payload.message,
+        },
+        isProcessing: false,
       };
     default:
       return state;
