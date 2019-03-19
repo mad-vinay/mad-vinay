@@ -80,7 +80,6 @@ export const idDetails = {
     // use async/await for async actions
 
     async getFrontIdDetails(data) {
-      debugger
       axios({
         method: 'post',
         url,

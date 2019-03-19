@@ -79,11 +79,12 @@ class Scanner extends Component {
 
   render() {
       let {videoVisible, imageVisible} = this.state;
-      let {btnText, data: {isProcessing}} = this.props;
+      let {btnText, data} = this.props;
+      let isProcessing =false;
     return (
       <Styled.Container>
         {
-          this.props.data.error.has && 
+          this.props.data && this.props.data.error.has && 
           <ErrorMessage message={this.props.data.error.message}></ErrorMessage>
         }
         <div className="videoContainer">

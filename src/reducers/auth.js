@@ -18,7 +18,9 @@ import {
   DISPLAY_START_SCREEN,
   SET_DATA_SUCCESS,
   SET_DATA_FAILED,
-  SET_PARTIALLY_FAILED
+  SET_PARTIALLY_FAILED,
+  SET_PROCESSING_STATUS,
+  UPDATE_DATA
 } from "../actionCreators/auth";
 
 import { cleanPin, cleanDmsid, cleanOtp } from "../util";
@@ -144,6 +146,24 @@ export default function (
         },
         isProcessing: false,
       };
+      
+      case UPDATE_DATA:
+      return {
+        ...initialState,
+        data: {
+          frontData: {
+            ...initialState.data.frontData,
+            ...action.payload
+          }
+        },
+      }
+
+  case SET_PROCESSING_STATUS:
+      return {
+        ...initialState,
+        isProcessing: true,
+      }
+      
       case SET_DATA_FAILED:
       debugger
       return {

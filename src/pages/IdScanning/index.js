@@ -18,8 +18,8 @@ import FormWrapper from "./style";
 import {
   getFrontIdDetails,
   // loginAclearDataction,
-  // setProcessingStatus,
-  // updateData
+  setProcessingStatus,
+  updateData
 } from "../../../src/actionCreators/auth";
 
 import get from "lodash/get";
@@ -47,8 +47,10 @@ class IdScanning extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    debugger
-    this.setState({ data: { ...nextProps.idDetails.data.frontData } });
+    if(nextProps.idDetails && nextProps.idDetails.data) {
+
+      this.setState({ data: { ...nextProps.idDetails.data.frontData } });
+    }
   }
 
   handleBackButton = () => {
@@ -66,7 +68,9 @@ class IdScanning extends React.Component {
     if (number && surname && dob) {
       history.push("/IdRearScanning");
     } else {
-      this.setState({ message: 'Por favor ingrese todos los campos' });
+      // this.setState({ message: 'Por favor ingrese todos los campos' });
+      history.push("/IdRearScanning");
+
     }
   }
 
@@ -186,7 +190,9 @@ class IdScanning extends React.Component {
 
 export default connect(
   state => {
+    console.log(state, "########################################")
     return {
+      
       // dmsid: get(state, "auth.dmsid") || "",
       // pin: get(state, "auth.pin") || "",
       // status: get(state, "auth.status"),
@@ -194,19 +200,19 @@ export default connect(
     };
   },
   dispatch => {
-    return {
+    return ({
       getFrontIdDetails: (data) => {
         return dispatch(getFrontIdDetails(data));
       },
-      // setProcessingStatus: (status) => {
-      //   return dispatch(setProcessingStatus(status));
-      // },
-      // clearData: () => {
-      //   return dispatch(loginAclearDataction());
-      // },
-      // updateData: (data) => {
-      //   return dispatch(updateData(data));
-      // }
-    };
+      setProcessingStatus: (status) => {
+        return dispatch(setProcessingStatus(status));
+      },
+      clearData: () => {
+        // return dispatch(loginAclearDataction());
+      },
+      updateData: (data) => {
+        return dispatch(updateData(data));
+      }
+    });
   }
 )(IdScanning);

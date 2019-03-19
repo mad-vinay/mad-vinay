@@ -48,6 +48,9 @@ export const DISPLAY_START_SCREEN = "START_SCREEN";
 export const SET_DATA_SUCCESS = "SET_DATA_SUCCESS";
 export const SET_PARTIALLY_FAILED = "SET_PARTIALLY_FAILED";
 export const SET_DATA_FAILED = "SET_DATA_FAILED";
+export const SET_PROCESSING_STATUS = 'SET_PROCESSING_STATUS';
+
+export const UPDATE_DATA = 'UPDATE_DATA'
 
 
 
@@ -442,41 +445,9 @@ export const displayStartScreen = () => {
 
 
 export const getFrontIdDetails = (data) => {
-  debugger
-  return (dispatch) => {
-    
-    // const state = getState();
-    // const { dmsid, pin } = get(state, "auth");
-    // const msisdn = get(state, "auth.token.msisdn");
-    // const page = get(state, "route.data.page");
-
-    // API.login({ dmsid, pin, msisdn }).then(
-    //    loginData => {
-    //      debugger
-    //     identify(msisdn, {
-    //       distributorId: get(loginData, "distributor"),
-    //       seller: get(loginData, "seller"),
-    //       pos_msisdn: msisdn,
-    //       id: dmsid
-    //     });
-    //     API.getDmsidData({ dmsid }).then(data => {
-    //       dispatch(dmsidFetchedAction(data));
-    //     });
-    //     dispatch(loggedinAction({ login: loginData }));
-    //     dispatch(requestBalanceAction());
-    //     autoLogout(dispatch, getState);
-    //     // if ("MainMenu" !== page) {
-    //     //   redirectTo({ page: "MainMenu" });
-    //     // } else {
-    //     //   restartResponders();
-    //     // }
-    //   },
-    //   err => {
-    //     const error = get(err, "response.data.error.description");
-    //     dispatch(addAlertAction("error", error));
-    //   }
-    // );
-
+ debugger;
+  return (dispatch) =>  {
+  //  dispatch(setProcessingStatus())
    axios({
       method: 'post',
       url,
@@ -490,6 +461,7 @@ export const getFrontIdDetails = (data) => {
     }).then(data => {
       // const Payload = JSON.parse(data.data.Payload);
       const Payload = data.data.Payload;
+      debugger
       if (Payload.errorMessage) {
         dispatch(setDataFailed(Payload.errorMessage));
       } else {
@@ -516,9 +488,12 @@ export const getFrontIdDetails = (data) => {
         }
       }
     }).catch(({ message }) => {
+      debugger
       dispatch(setDataFailed(message));
     })
-  };
+
+  }
+  
 };
 
 export const setDataSuccess = data => {
@@ -538,4 +513,17 @@ export const setDataPartiallyFailed = data => {
     type: SET_PARTIALLY_FAILED,
     payload: data
   };
+};
+
+export const setProcessingStatus =  () => {
+  return {
+    type: SET_PROCESSING_STATUS
+  }
+};
+
+export const updateData =  (data) => {
+  return {
+    type: UPDATE_DATA,
+    payload: data
+  }
 };

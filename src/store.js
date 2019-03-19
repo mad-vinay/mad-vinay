@@ -15,6 +15,6 @@ const getMiddleware = () => {
   return applyMiddleware(...middleware);
 };
 
-const store = createStore(reducer, composeWithDevTools(getMiddleware()));
+const store = createStore(reducer, applyMiddleware(thunk));
 
 export default store;

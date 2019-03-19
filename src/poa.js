@@ -2,7 +2,7 @@ import React from 'react';
 import './index.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 // import store from '../src/store';
-import store from '../src/store/index'
+import store from '../src/store'
 import { Provider } from 'react-redux'
 import baseTheme from './themes/baseTheme'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
